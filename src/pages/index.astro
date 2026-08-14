@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ToolCard from '../components/ToolCard.astro';
+import '../styles/global.css';
+
+const tools = [
+  {
+    id: "qr-generator",
+    title: "Free QR Code Generator",
+    description: "Create custom, high-quality QR codes instantly. No sign-up required.",
+    url: "https://free-qr-code-generator-online.github.io/",
+    icon: "qr-code-icon"
+  },
+  {
+    id: "pdf-editor",
+    title: "Free PDF Editor Online",
+    description: "Edit, merge, split, and annotate your PDF files directly in the browser.",
+    url: "https://free-pdf-editor-online.github.io/",
+    icon: "document-text-icon"
+  },
+  {
+    id: "signature-maker",
+    title: "Free Signature Online",
+    description: "Draw, type, and download digital signatures securely.",
+    url: "https://free-signature-online.github.io/",
+    icon: "pencil-icon"
+  },
+  {
+    id: "seo-tools",
+    title: "SEO Online Tools",
+    description: "Analyze, audit, and optimize your website's search engine performance.",
+    url: "https://seo-online-tools.github.io/",
+    icon: "chart-bar-icon"
+  },
+  {
+    id: "image-compressor",
+    title: "Free Image Compressor",
+    description: "Compress and optimize JPEGs, PNGs, and WebPs without losing quality.",
+    url: "https://free-image-compressor.github.io/",
+    icon: "photo-icon"
+  },
+  {
+    id: "excel-viewer",
+    title: "Excel Viewer Online",
+    description: "View, analyze, and read Excel spreadsheets online without installing Office.",
+    url: "https://excel-viewer-online.github.io/",
+    icon: "table-cells-icon"
+  }
+];
+
+const schemaItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": tools.map((tool, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "SoftwareApplication",
+      "name": tool.title,
+      "description": tool.description,
+      "url": tool.url,
+      "applicationCategory": "BrowserApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    }
+  }))
+};
+
+const faqs = [
+  {
+    question: "Are these online tools really 100% free?",
+    answer: "Yes, all tools on FreeToolsHub are completely free to use. There are no hidden fees, subscriptions, or premium tiers."
+  },
+  {
+    question: "Do I need to create an account or sign up?",
+    answer: "No sign-up is required. You can access and use every tool instantly directly from your browser without providing any personal information."
+  },
+  {
+    question: "Are my files secure when using tools like the PDF Editor or Image Compressor?",
+    answer: "Absolutely. Our tools are designed with privacy in mind. We prioritize local browser processing, meaning your sensitive files and data never leave your device."
+  }
+];
+
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<Layout 
+  title="Free Online Web Tools Collection | Fast & No Signup" 
+  description="A curated collection of lightning-fast, 100% free online tools including PDF editors, QR code generators, Image compressors, and more."
+>
+  <Header />
+  
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow w-full">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">
+        Premium Free Tools
+      </h1>
+      <p class="text-xl text-secondary max-w-2xl mx-auto">
+        Lightning-fast, highly optimized web tools to help you get work done. 100% free forever. No sign-up required.
+      </p>
+    </div>
+
+    <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {tools.map((tool) => (
+        <ToolCard 
+          id={tool.id}
+          title={tool.title}
+          description={tool.description}
+          url={tool.url}
+          icon={tool.icon}
+        />
+      ))}
+    </div>
+    
+    <div id="no-results" class="hidden text-center py-20">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-bordercolor/30 text-secondary mb-4">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-primary mb-2">No tools found</h2>
+      <p class="text-lg text-secondary">Try adjusting your search query.</p>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="mt-24 mb-8 border-t border-bordercolor pt-16">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-primary mb-10 text-center tracking-tight">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <article class="bg-card border border-bordercolor rounded-xl p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all duration-300">
+              <h3 class="text-lg font-semibold text-primary mb-3">{faq.question}</h3>
+              <p class="text-secondary leading-relaxed">{faq.answer}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="bg-card border-t border-bordercolor py-10 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-secondary text-sm font-medium">
+        &copy; {new Date().getFullYear()} FreeToolsHub. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JSON-LD for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaItemList)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
+
+  <!-- Client-side search -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('tool-search');
+      const cards = document.querySelectorAll('.tool-card');
+      const noResults = document.getElementById('no-results');
+      const toolsGrid = document.getElementById('tools-grid');
+
+      if (searchInput && toolsGrid && noResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+          let visibleCount = 0;
+
+          cards.forEach((card) => {
+            const el = card as HTMLElement;
+            const title = el.getAttribute('data-title') || '';
+            const desc = el.getAttribute('data-description') || '';
+            
+            if (title.includes(query) || desc.includes(query)) {
+              el.style.display = 'block';
+              visibleCount++;
+            } else {
+              el.style.display = 'none';
+            }
+          });
+          
+          if (visibleCount === 0) {
+            toolsGrid.style.display = 'none';
+            noResults.style.display = 'block';
+          } else {
+            toolsGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</Layout>
