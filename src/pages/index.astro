@@ -4,51 +4,589 @@ import Header from '../components/Header.astro';
 import ToolCard from '../components/ToolCard.astro';
 import '../styles/global.css';
 
+const categories = [
+  { id: 'all', name: 'All Tools', icon: '✨' },
+  { id: 'pdf', name: 'PDF & Documents', icon: '📄' },
+  { id: 'image', name: 'Image & Design', icon: '🎨' },
+  { id: 'audio-video', name: 'Audio & Video', icon: '🎬' },
+  { id: 'web-marketing', name: 'Web & Marketing', icon: '🚀' },
+  { id: 'calculators', name: 'Calculators & Finance', icon: '🧮' },
+  { id: 'productivity', name: 'Productivity & Lifestyle', icon: '⚡' }
+];
+
 const tools = [
+  // --- PDF & Documents ---
   {
-    id: "qr-generator",
-    title: "Free QR Code Generator",
-    description: "Create custom, high-quality QR codes instantly. No sign-up required.",
-    url: "https://free-qr-code-generator-online.github.io/",
-    icon: "qr-code-icon"
-  },
-  {
-    id: "pdf-editor",
+    id: "free-pdf-editor",
     title: "Free PDF Editor Online",
     description: "Edit, merge, split, and annotate your PDF files directly in the browser.",
     url: "https://free-pdf-editor-online.github.io/",
-    icon: "document-text-icon"
+    icon: "document-text-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
   },
   {
-    id: "signature-maker",
+    id: "editpdf",
+    title: "Edit PDF",
+    description: "Edit PDF text, insert graphics, redact sections, and organize pages online.",
+    url: "https://editpdf.github.io/",
+    icon: "document-text-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "drawonpdf",
+    title: "Draw on PDF",
+    description: "Freehand draw, highlight, annotate, and add custom shapes to any PDF file.",
+    url: "https://drawonpdf.github.io/",
+    icon: "pencil-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "mergepdfs",
+    title: "Merge PDFs",
+    description: "Combine multiple PDF documents into one ordered PDF file in seconds.",
+    url: "https://mergepdfs.github.io/",
+    icon: "document-duplicate-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "pdfcompressor",
+    title: "PDF Compressor",
+    description: "Shrink heavy PDF file sizes while maintaining sharp document readability.",
+    url: "https://pdfcompressor.github.io/",
+    icon: "document-arrow-down-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "pdfsigner",
+    title: "PDF Signer",
+    description: "Sign legal contracts, NDAs, and PDF agreements with your digital signature.",
+    url: "https://pdfsigner.github.io/",
+    icon: "pencil-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "free-signature-online",
     title: "Free Signature Online",
-    description: "Draw, type, and download digital signatures securely.",
+    description: "Draw, type, and download transparent PNG digital signatures in seconds.",
     url: "https://free-signature-online.github.io/",
-    icon: "pencil-icon"
+    icon: "pencil-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
   },
   {
-    id: "seo-tools",
-    title: "SEO Online Tools",
-    description: "Analyze, audit, and optimize your website's search engine performance.",
-    url: "https://seo-online-tools.github.io/",
-    icon: "chart-bar-icon"
-  },
-  {
-    id: "image-compressor",
-    title: "Free Image Compressor",
-    description: "Compress and optimize JPEGs, PNGs, and WebPs without losing quality.",
-    url: "https://free-image-compressor.github.io/",
-    icon: "photo-icon"
+    id: "image2pdf",
+    title: "Image to PDF",
+    description: "Convert multiple JPG, PNG, and WebP images into a single clean PDF file.",
+    url: "https://image2pdf.github.io/",
+    icon: "document-arrow-up-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
   },
   {
     id: "excel-viewer",
     title: "Excel Viewer Online",
-    description: "View, analyze, and read Excel spreadsheets online without installing Office.",
+    description: "Open, view, and analyze Excel (XLSX, XLS) and CSV files without Microsoft Office.",
     url: "https://excel-viewer-online.github.io/",
-    icon: "table-cells-icon"
+    icon: "table-cells-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "json2excel",
+    title: "JSON to Excel",
+    description: "Parse nested or flat JSON objects and export them directly to XLSX or CSV.",
+    url: "https://json2excel.github.io/",
+    icon: "table-cells-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "extracttext",
+    title: "Extract Text (OCR)",
+    description: "Extract selectable text from images, photos, and scanned documents instantly.",
+    url: "https://extracttext.github.io/",
+    icon: "eye-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+  {
+    id: "online-note",
+    title: "Online Notepad",
+    description: "Minimalist auto-saving scratchpad with live word counting and text downloads.",
+    url: "https://online-note.github.io/",
+    icon: "clipboard-document-list-icon",
+    category: "pdf",
+    categoryName: "PDF & Documents"
+  },
+
+  // --- Image & Design ---
+  {
+    id: "free-image-compressor",
+    title: "Free Image Compressor",
+    description: "Compress and optimize JPEG, PNG, and WebP files without noticeable quality loss.",
+    url: "https://free-image-compressor.github.io/",
+    icon: "photo-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "bulk-bg-remover",
+    title: "Bulk Background Remover",
+    description: "Remove image backgrounds automatically from multiple photos simultaneously.",
+    url: "https://bulk-bg-remover.github.io/",
+    icon: "sparkler-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "bulkresize",
+    title: "Bulk Image Resizer",
+    description: "Batch resize multiple images by exact dimensions or scale percentages instantly.",
+    url: "https://bulkresize.github.io/",
+    icon: "photo-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "profilepic-resizer",
+    title: "Profile Pic Resizer",
+    description: "Perfect avatar circular and square crops for Instagram, YouTube, and LinkedIn.",
+    url: "https://profilepic-resizer.github.io/",
+    icon: "user-circle-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "upscaleimage",
+    title: "Upscale Image",
+    description: "Increase photo resolution and enhance pixel clarity without quality distortion.",
+    url: "https://upscaleimage.github.io/",
+    icon: "sparkler-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "makepng",
+    title: "Make PNG",
+    description: "Convert pictures from JPG, WebP, or BMP to clean PNG format with transparency.",
+    url: "https://makepng.github.io/",
+    icon: "photo-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "makegif",
+    title: "Make GIF",
+    description: "Convert short video snippets and photo sequences into animated GIF images.",
+    url: "https://makegif.github.io/",
+    icon: "film-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "image2hex",
+    title: "Image to Hex",
+    description: "Pick any pixel color from uploaded images and copy RGB, HEX, and HSL codes.",
+    url: "https://image2hex.github.io/",
+    icon: "sparkler-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "hexhunt",
+    title: "Hex Hunt",
+    description: "Interactive color perception game and hex code learning challenge for designers.",
+    url: "https://hexhunt.github.io/",
+    icon: "sparkler-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "kids-draw",
+    title: "Kids Draw",
+    description: "Simple, fun, and distraction-free digital drawing whiteboard for children.",
+    url: "https://kids-draw.github.io/",
+    icon: "paint-brush-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+  {
+    id: "memory-reel",
+    title: "Memory Reel",
+    description: "Create smooth video slideshow reels and sentimental memories from your photos.",
+    url: "https://memory-reel.github.io/",
+    icon: "video-camera-icon",
+    category: "image",
+    categoryName: "Image & Design"
+  },
+
+  // --- Audio & Video ---
+  {
+    id: "audio-cutter",
+    title: "Audio Cutter",
+    description: "Trim, cut, and slice MP3, WAV, and audio tracks online without quality loss.",
+    url: "https://audio-cutter.github.io/",
+    icon: "scissors-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "audiojoiner",
+    title: "Audio Joiner",
+    description: "Merge multiple audio clips and music files into a single seamless track.",
+    url: "https://audiojoiner.github.io/",
+    icon: "musical-note-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "browsercut",
+    title: "Browser Cut",
+    description: "Fast, in-browser video trimmer to clip and trim videos without uploading to servers.",
+    url: "https://browsercut.github.io/",
+    icon: "scissors-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "compressvideo",
+    title: "Video Compressor",
+    description: "Compress large video files directly in your browser with high visual quality.",
+    url: "https://compressvideo.github.io/",
+    icon: "video-camera-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "mergevideo",
+    title: "Merge Video",
+    description: "Join and merge multiple video files into a single video track right in browser.",
+    url: "https://mergevideo.github.io/",
+    icon: "film-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "video-merger",
+    title: "Video Merger",
+    description: "Combine multiple MP4, WebM, and video clips into one continuous movie.",
+    url: "https://video-merger.github.io/",
+    icon: "film-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "video-to-audio",
+    title: "Video to Audio",
+    description: "Convert video files into MP3 or WAV audio tracks instantly in browser.",
+    url: "https://video-to-audio.github.io/",
+    icon: "musical-note-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "videotojpg",
+    title: "Video to JPG",
+    description: "Capture and extract high-resolution still picture frames from video files.",
+    url: "https://videotojpg.github.io/",
+    icon: "camera-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "silenceremover",
+    title: "Silence Remover",
+    description: "Detect and remove silent pauses from audio recordings automatically.",
+    url: "https://silenceremover.github.io/",
+    icon: "speaker-x-mark-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "screenrecord",
+    title: "Screen Recorder",
+    description: "Record full screen, application windows, or browser tabs with microphone audio.",
+    url: "https://screenrecord.github.io/",
+    icon: "video-camera-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "browser-dj",
+    title: "Browser DJ",
+    description: "Mix, crossfade, and play audio tracks in real-time directly inside your browser.",
+    url: "https://browser-dj.github.io/",
+    icon: "disc-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "testmymic",
+    title: "Test My Mic",
+    description: "Check microphone input levels, monitor playback echo, and test voice clarity.",
+    url: "https://testmymic.github.io/",
+    icon: "microphone-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+  {
+    id: "voicetake",
+    title: "VoiceTake",
+    description: "Record voice memos, speech dictations, and audio ideas with one-click saving.",
+    url: "https://voicetake.github.io/",
+    icon: "microphone-icon",
+    category: "audio-video",
+    categoryName: "Audio & Video"
+  },
+
+  // --- Web & Marketing ---
+  {
+    id: "seo-tools",
+    title: "SEO Online Tools",
+    description: "Analyze meta tags, headings, keyword density, and search engine performance.",
+    url: "https://seo-online-tools.github.io/",
+    icon: "chart-bar-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "free-qr-code-generator",
+    title: "Free QR Code Generator",
+    description: "Generate high-resolution vector and image QR codes for your business and links.",
+    url: "https://free-qr-code-generator-online.github.io/",
+    icon: "qr-code-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "createqr",
+    title: "Create QR",
+    description: "Customizable, instant QR code generator for URLs, Wi-Fi credentials, and text.",
+    url: "https://createqr.github.io/",
+    icon: "qr-code-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "clone-link",
+    title: "Clone Link",
+    description: "Create short branded redirects, URL clones, and smart link forwarders.",
+    url: "https://clone-link.github.io/",
+    icon: "link-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "wadirect",
+    title: "WA Direct",
+    description: "Open WhatsApp chats directly without having to save telephone numbers first.",
+    url: "https://wadirect.github.io/",
+    icon: "chat-bubble-left-right-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "postqueue",
+    title: "PostQueue",
+    description: "Draft, queue, and schedule social media tweets, updates, and content queues.",
+    url: "https://postqueue.github.io/",
+    icon: "queue-list-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "captionlk",
+    title: "Caption LK",
+    description: "Generate catchy, creative social media captions and trending hashtags.",
+    url: "https://captionlk.github.io/",
+    icon: "chat-bubble-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "content30",
+    title: "Content 30",
+    description: "30-day social media content planner, prompt organizer, and strategy calendar.",
+    url: "https://content30.github.io/",
+    icon: "calendar-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+  {
+    id: "promptjot",
+    title: "PromptJot",
+    description: "AI prompt engineering organizer to catalog, test, and save effective prompts.",
+    url: "https://promptjot.github.io/",
+    icon: "light-bulb-icon",
+    category: "web-marketing",
+    categoryName: "Web & Marketing"
+  },
+
+  // --- Calculators & Finance ---
+  {
+    id: "loancal",
+    title: "Loan Calculator",
+    description: "Compute monthly mortgage EMI, loan interest schedules, and repayment breakdowns.",
+    url: "https://loancal.github.io/",
+    icon: "calculator-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "rentvsbuy",
+    title: "Rent vs Buy Calculator",
+    description: "Calculate real financial outcome of renting and investing vs buying property.",
+    url: "https://rentvsbuy.github.io/",
+    icon: "home-modern-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "taxtally",
+    title: "Tax Tally",
+    description: "Calculate income tax brackets, salary deductions, and net take-home pay.",
+    url: "https://taxtally.github.io/",
+    icon: "currency-dollar-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "bulkinvoice",
+    title: "Bulk Invoice Generator",
+    description: "Generate, preview, and download professional client PDF invoices in bulk.",
+    url: "https://bulkinvoice.github.io/",
+    icon: "document-duplicate-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "calculatecgpa",
+    title: "Calculate CGPA",
+    description: "Quickly compute college GPA and cumulative CGPA with multi-semester support.",
+    url: "https://calculatecgpa.github.io/",
+    icon: "academic-cap-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "trueage",
+    title: "True Age Calculator",
+    description: "Accurate age calculator with months, days, minutes, and next birthday countdown.",
+    url: "https://trueage.github.io/",
+    icon: "calendar-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "truebmi",
+    title: "True BMI Calculator",
+    description: "Calculate Body Mass Index (BMI), ideal weight bounds, and body metrics.",
+    url: "https://truebmi.github.io/",
+    icon: "scale-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "makecharts",
+    title: "Make Charts",
+    description: "Design beautiful interactive bar, line, radar, and pie charts with instant export.",
+    url: "https://makecharts.github.io/",
+    icon: "chart-bar-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+  {
+    id: "forgeenergy",
+    title: "Forge Energy",
+    description: "Calculate appliance power usage, electricity costs, and energy conservation plans.",
+    url: "https://forgeenergy.github.io/",
+    icon: "bolt-icon",
+    category: "calculators",
+    categoryName: "Calculators & Finance"
+  },
+
+  // --- Productivity & Lifestyle ---
+  {
+    id: "encryptfile",
+    title: "Encrypt File",
+    description: "Military-grade client-side AES-256 file encryption and decryption in browser.",
+    url: "https://encryptfile.github.io/",
+    icon: "lock-closed-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "habit-grid",
+    title: "Habit Grid",
+    description: "Visual GitHub-style streak matrix to track habits and maintain daily consistency.",
+    url: "https://habit-grid.github.io/",
+    icon: "squares-2x2-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "box-breathe",
+    title: "Box Breathe",
+    description: "Interactive 4-4-4-4 box breathing exercise for stress relief, calm, and focus.",
+    url: "https://box-breathe.github.io/",
+    icon: "heart-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "browser-journal",
+    title: "Browser Journal",
+    description: "Private, minimalist daily markdown journal stored securely in local browser storage.",
+    url: "https://browser-journal.github.io/",
+    icon: "book-open-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "digital-gift",
+    title: "Digital Gift",
+    description: "Craft interactive celebration surprises, birthday cards, and digital vouchers.",
+    url: "https://digital-gift.github.io/",
+    icon: "gift-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "match-board",
+    title: "Match Board",
+    description: "Live scoreboard, tournament bracket keeper, and multi-player game tracker.",
+    url: "https://match-board.github.io/",
+    icon: "trophy-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "slgoviq",
+    title: "SL Gov IQ",
+    description: "Practice questions and study resources for Sri Lanka government competitive exams.",
+    url: "https://slgoviq.github.io/",
+    icon: "academic-cap-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
+  },
+  {
+    id: "kendaraya",
+    title: "Kendaraya",
+    description: "Vedic astrology birth chart calculation, planetary positions, and Kundali maker.",
+    url: "https://kendaraya.github.io/",
+    icon: "sparkler-icon",
+    category: "productivity",
+    categoryName: "Productivity & Lifestyle"
   }
 ];
 
+// Schema ItemList for SEO
 const schemaItemList = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -73,15 +611,19 @@ const schemaItemList = {
 const faqs = [
   {
     question: "Are these online tools really 100% free?",
-    answer: "Yes, all tools on FreeToolsHub are completely free to use. There are no hidden fees, subscriptions, or premium tiers."
+    answer: "Yes, all 60+ tools on FreeToolsHub are completely free to use with no hidden subscriptions, limits, or paywalls."
   },
   {
     question: "Do I need to create an account or sign up?",
-    answer: "No sign-up is required. You can access and use every tool instantly directly from your browser without providing any personal information."
+    answer: "No account or registration is required. Every tool opens directly in your browser and is ready to use instantly."
   },
   {
-    question: "Are my files secure when using tools like the PDF Editor or Image Compressor?",
-    answer: "Absolutely. Our tools are designed with privacy in mind. We prioritize local browser processing, meaning your sensitive files and data never leave your device."
+    question: "Are my files secure when using these tools?",
+    answer: "Yes. Our suite prioritizes client-side browser processing using modern WebAssembly and Web APIs. Your files never leave your computer."
+  },
+  {
+    question: "Can I use these web tools on mobile devices?",
+    answer: "Every tool is built with a responsive design, working smoothly across smartphones, tablets, laptops, and desktop computers."
   }
 ];
 
@@ -100,21 +642,56 @@ const schemaFaq = {
 ---
 
 <Layout 
-  title="Free Online Web Tools Collection | Fast & No Signup" 
-  description="A curated collection of lightning-fast, 100% free online tools including PDF editors, QR code generators, Image compressors, and more."
+  title="FreeToolsHub - 60+ Free Online Web Tools | Fast, Secure & No Signup" 
+  description="Discover 60+ lightning-fast, 100% free online tools for PDF editing, image compression, video trimming, QR code generation, calculators, and productivity."
 >
   <Header />
   
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow w-full">
-    <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">
-        Premium Free Tools
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow w-full">
+    <!-- Hero Section -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4 border border-accent/20">
+        <span>⚡ 60+ 100% Free Web Tools</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tight mb-4">
+        Everything You Need in One Place
       </h1>
-      <p class="text-xl text-secondary max-w-2xl mx-auto">
-        Lightning-fast, highly optimized web tools to help you get work done. 100% free forever. No sign-up required.
+      <p class="text-lg sm:text-xl text-secondary max-w-2xl mx-auto">
+        Lightning-fast, privacy-first web utilities to get things done. No registration, no watermarks, completely free forever.
       </p>
     </div>
 
+    <!-- Category Filters Navigation -->
+    <div class="mb-10">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-secondary">Filter by Category</h2>
+        <span id="active-count" class="text-xs font-medium text-secondary">Showing {tools.length} tools</span>
+      </div>
+      
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="category-filters" role="tablist" aria-label="Tool Categories">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={idx === 0 ? "true" : "false"}
+            data-category-id={cat.id}
+            class={`category-tab inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 border cursor-pointer ${
+              idx === 0
+                ? 'bg-primary text-white border-primary shadow-sm'
+                : 'bg-card text-secondary border-bordercolor hover:text-primary hover:border-accent/40 hover:bg-background'
+            }`}
+          >
+            <span>{cat.icon}</span>
+            <span>{cat.name}</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-80">
+              {cat.id === 'all' ? tools.length : tools.filter(t => t.category === cat.id).length}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Tools Grid -->
     <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {tools.map((tool) => (
         <ToolCard 
@@ -123,10 +700,13 @@ const schemaFaq = {
           description={tool.description}
           url={tool.url}
           icon={tool.icon}
+          category={tool.category}
+          categoryName={tool.categoryName}
         />
       ))}
     </div>
     
+    <!-- No Results State -->
     <div id="no-results" class="hidden text-center py-20">
       <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-bordercolor/30 text-secondary mb-4">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -134,7 +714,14 @@ const schemaFaq = {
         </svg>
       </div>
       <h2 class="text-2xl font-bold text-primary mb-2">No tools found</h2>
-      <p class="text-lg text-secondary">Try adjusting your search query.</p>
+      <p class="text-base text-secondary max-w-md mx-auto mb-6">We couldn't find any tools matching your search criteria. Try a different term or clear filters.</p>
+      <button 
+        id="reset-filters-btn"
+        type="button" 
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm"
+      >
+        <span>Reset Filters</span>
+      </button>
     </div>
 
     <!-- FAQ Section -->
@@ -176,32 +763,45 @@ const schemaFaq = {
   <script type="application/ld+json" set:html={JSON.stringify(schemaItemList)} />
   <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
 
-  <!-- Client-side search -->
+  <!-- Client-side filtering & search -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('tool-search');
+      const searchInput = document.getElementById('tool-search') as HTMLInputElement | null;
       const cards = document.querySelectorAll('.tool-card');
       const noResults = document.getElementById('no-results');
       const toolsGrid = document.getElementById('tools-grid');
+      const categoryTabs = document.querySelectorAll('.category-tab');
+      const activeCount = document.getElementById('active-count');
+      const resetBtn = document.getElementById('reset-filters-btn');
 
-      if (searchInput && toolsGrid && noResults) {
-        searchInput.addEventListener('input', (e) => {
-          const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
-          let visibleCount = 0;
+      let currentCategory = 'all';
+      let currentQuery = '';
 
-          cards.forEach((card) => {
-            const el = card as HTMLElement;
-            const title = el.getAttribute('data-title') || '';
-            const desc = el.getAttribute('data-description') || '';
-            
-            if (title.includes(query) || desc.includes(query)) {
-              el.style.display = 'block';
-              visibleCount++;
-            } else {
-              el.style.display = 'none';
-            }
-          });
-          
+      function filterTools() {
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const el = card as HTMLElement;
+          const title = el.getAttribute('data-title') || '';
+          const desc = el.getAttribute('data-description') || '';
+          const category = el.getAttribute('data-category') || '';
+
+          const matchesCategory = currentCategory === 'all' || category === currentCategory;
+          const matchesQuery = currentQuery === '' || title.includes(currentQuery) || desc.includes(currentQuery);
+
+          if (matchesCategory && matchesQuery) {
+            el.style.display = 'block';
+            visibleCount++;
+          } else {
+            el.style.display = 'none';
+          }
+        });
+
+        if (activeCount) {
+          activeCount.textContent = `Showing ${visibleCount} tool${visibleCount === 1 ? '' : 's'}`;
+        }
+
+        if (toolsGrid && noResults) {
           if (visibleCount === 0) {
             toolsGrid.style.display = 'none';
             noResults.style.display = 'block';
@@ -209,6 +809,55 @@ const schemaFaq = {
             toolsGrid.style.display = 'grid';
             noResults.style.display = 'none';
           }
+        }
+      }
+
+      // Category tab click
+      categoryTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          categoryTabs.forEach((t) => {
+            t.classList.remove('bg-primary', 'text-white', 'border-primary', 'shadow-sm');
+            t.classList.add('bg-card', 'text-secondary', 'border-bordercolor');
+            t.setAttribute('aria-selected', 'false');
+          });
+
+          tab.classList.add('bg-primary', 'text-white', 'border-primary', 'shadow-sm');
+          tab.classList.remove('bg-card', 'text-secondary', 'border-bordercolor');
+          tab.setAttribute('aria-selected', 'true');
+
+          currentCategory = tab.getAttribute('data-category-id') || 'all';
+          filterTools();
+        });
+      });
+
+      // Search input change
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+          filterTools();
+        });
+      }
+
+      // Reset button click
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          currentCategory = 'all';
+          currentQuery = '';
+          if (searchInput) {
+            searchInput.value = '';
+          }
+          categoryTabs.forEach((t, idx) => {
+            if (idx === 0) {
+              t.classList.add('bg-primary', 'text-white', 'border-primary', 'shadow-sm');
+              t.classList.remove('bg-card', 'text-secondary', 'border-bordercolor');
+              t.setAttribute('aria-selected', 'true');
+            } else {
+              t.classList.remove('bg-primary', 'text-white', 'border-primary', 'shadow-sm');
+              t.classList.add('bg-card', 'text-secondary', 'border-bordercolor');
+              t.setAttribute('aria-selected', 'false');
+            }
+          });
+          filterTools();
         });
       }
     });
